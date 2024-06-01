@@ -1,0 +1,15 @@
+# Ignore model files
+*.gguf
+*.pth
+
+# Ignore model directory if needed
+/model/
+
+# Ignore Python cache and virtual environment directories
+__pycache__/
+*.pyc
+.env/
+.venv/
+
+# Ignore Poetry lock file if you don't want to include it
+poetry.lock

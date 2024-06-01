@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "weather-chatbot"
+version = "0.1.0"
+description = "A chatbot that provides weather forecasts using a fine-tuned model"
+authors = ["Vatsal <vatsal1804@gmail.com>"]
+license = "CC-BY-NC-SA-4.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
