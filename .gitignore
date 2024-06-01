@@ -1,7 +1,7 @@
 # Ignore model files
 *.gguf
 *.pth
-
+#./push_model.py
 # Ignore model directory if needed
 /model/
 
