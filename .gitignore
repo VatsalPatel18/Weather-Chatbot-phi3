@@ -12,4 +12,4 @@ __pycache__/
 .venv/
 
 # Ignore Poetry lock file if you don't want to include it
-poetry.lock
+#poetry.lock
