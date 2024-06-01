@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "weather-chatbot-phi3"
-version = "0.1.1"
+version = "0.1.2"
 description = "An LLM Chatbot integrated with Open Weather API for Real-Time Weather Information."
 authors = ["Vatsal Patel <vatsal1804@gmail.com>"]
 license = "CC-BY-NC-SA-4.0"
@@ -25,3 +25,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 weather-chatbot-phi3 = "weather_chatbot.app:main"
+
+[tool.poetry.dev-dependencies]
+pyinstaller = { version = "^6.7.0", python = ">=3.8,<3.13" }
