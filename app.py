@@ -5,7 +5,7 @@ import requests
 import huggingface_hub
 
 # Download model from Hugging Face if not already present
-model_path = "./model/phi-3-gguf/Phi-3-mini-4k-instruct-gguf"
+model_path = "./model/phi-3-gguf/Phi-3-mini-4k-instruct-q4.gguf"
 if not os.path.exists(model_path):
     huggingface_hub.hf_hub_download(
         repo_id="VatsalPatel18/phi3-mini-WeatherBot",
