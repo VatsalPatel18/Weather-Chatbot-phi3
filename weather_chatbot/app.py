@@ -82,5 +82,8 @@ with gr.Blocks(css="style.css") as demo:
     )
 
 # Launch the Gradio interface
-demo.launch(share=True, debug=True)
+def main():
+    demo.launch(share=True, debug=True)
 
+if __name__ == "__main__":
+    main()
