@@ -5,6 +5,9 @@
 # Ignore model directory if needed
 /model/
 
+# Ignore Dist files
+dist/
+
 # Ignore Python cache and virtual environment directories
 __pycache__/
 *.pyc
@@ -13,3 +16,9 @@ __pycache__/
 
 # Ignore Poetry lock file if you don't want to include it
 #poetry.lock
+
+
+#ignore tar files
+*.tar.gz
+
+
