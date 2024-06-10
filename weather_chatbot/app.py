@@ -5,7 +5,7 @@ import requests
 import huggingface_hub
 
 # Download model from Hugging Face if not already present
-model_path = "./model/phi-3-gguf/Phi-3-mini-4k-instruct-q4.gguf"
+model_path = "../model/phi-3-gguf/Phi-3-mini-4k-instruct-q4.gguf"
 
 # Initialize the Llama model
 llm = Llama(
