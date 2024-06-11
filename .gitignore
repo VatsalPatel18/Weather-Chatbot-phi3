@@ -5,6 +5,17 @@
 # Ignore model directory if needed
 /model/
 
+/model/
+/models/gguf/
+/models/phi-3-gguf/
+/models/trained/
+/models/unsloth/
+
+/models/**/*.json
+
+*.safetensors
+*.safetensors.index.json
+
 # Ignore Dist files
 dist/
 
