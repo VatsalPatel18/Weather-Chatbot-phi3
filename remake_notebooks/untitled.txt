@@ -1,0 +1,65 @@
+from typing import Annotated, Literal
+
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain.llms import LlamaCpp
+from langchain_core.tools import BaseTool
+
+from langgraph.graph import END,StateGraph, MessagesState
+from langgraph.prebuilt import ToolNode
+from langgraph.checkpoint import MemorySaver
+
+import requests
+from langchain.agents import Tool
+from langchain.llms import LlamaCpp 
+
+api_key = "c6dfc4d92a8f972d237ef696ec87b37a" # Replace with your actual OpenWeatherMap API key
+
+def get_weather_info(city):
+    """Fetches current weather and basic forecast for a city using OpenWeatherMap API."""
+    
+    # Current Weather
+    url_current = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    response_current = requests.get(url_current)
+    if response_current.status_code != 200:
+        return "Error: Could not fetch weather data."
+    data_current = response_current.json()
+
+    # Extract Relevant Information
+    description = data_current['weather'][0]['description']
+    temperature = data_current['main']['temp']
+    feels_like = data_current['main']['feels_like']
+    humidity = data_current['main']['humidity']
+    wind_speed = data_current['wind']['speed']
+    
+    # Formulate Response
+    response = f"The weather in {city} is currently {description} with a temperature of {temperature}°C (feels like {feels_like}°C). Humidity is {humidity}% and wind speed is {wind_speed} m/s."
+    return response
+
+weather_tool = Tool(
+    name="WeatherLookup",
+    func=get_weather_info,
+    description="Useful to get the current weather information and basic forecast for a city."
+)
+tools = [WeatherTool()]
+tool_node = ToolNode(tools) 
+
+def should_continue(state: MessagesState) -> Literal["WeatherLookup", END]:
+    messages = state['messages']
+    last_message = messages[-1]
+    if isinstance(last_message, AIMessage) and last_message.tool_calls:
+        return "WeatherLookup"
+    return END
+
+def call_model(state: MessagesState):
+    messages = state['messages']
+    response = llm.invoke(messages)
+    return {"messages": [response]}
+class WeatherTool(BaseTool):
+    name = "WeatherLookup"
+    description = "Useful to get the current weather information and basic forecast for a city."
+
+    def _run(self, city: str) -> str:
+        return get_weather_info(city)
+
+    def _arun(self, city: str) -> str:
+        raise NotImplementedError("WeatherTool does not support async")
