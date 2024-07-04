@@ -1,6 +1,9 @@
 import requests
 from collections import defaultdict
 from datetime import datetime, timedelta
+import json
+
+api_key = "c6dfc4d92a8f972d237ef696ec87b37a"
 
 def get_weather_info(city):
     """Fetches current weather information for a city using OpenWeatherMap API."""
