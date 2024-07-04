@@ -1,9 +1,7 @@
 import requests
-from langchain.agents import Tool
-from langchain.llms import LlamaCpp 
-from langchain.agents import initialize_agent
 from collections import defaultdict
-import json 
+from datetime import datetime, timedelta
+import json
 
 api_key = "c6dfc4d92a8f972d237ef696ec87b37a"
 
@@ -46,82 +44,39 @@ def get_weather_info(city):
 
 def get_forecast(city):
     """Fetches 5-day weather forecast for a city using OpenWeatherMap API."""
-    
     url_forecast = f"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric"
     response_forecast = requests.get(url_forecast)
     if response_forecast.status_code != 200:
         return "Error: Could not fetch forecast data."
     forecast_json = response_forecast.json()
     
-    return json.dumps(restructure_forecast(forecast_json), indent=2)
-    # return forecast_json
+    return restructure_forecast(forecast_json)
 
 def restructure_forecast(forecast_json):
-    """Restructures the forecast JSON data into a nested dictionary by date and time."""
-    
+    """Restructures the forecast JSON data into a nested dictionary by date and time, excluding the current date."""
+    current_date = datetime.now().date()
+    next_date = current_date + timedelta(days=1)
+
     structured_data = defaultdict(dict)
     
     for entry in forecast_json['list']:
         date, time = entry['dt_txt'].split()
-        structured_data[date][time] = {
-            'temperature': entry['main']['temp'],
-            'feels_like': entry['main']['feels_like'],
-            'temp_min': entry['main']['temp_min'],
-            'temp_max': entry['main']['temp_max'],
-            'pressure': entry['main']['pressure'],
-            'humidity': entry['main']['humidity'],
-            'weather': entry['weather'][0]['description'],
-            'icon': entry['weather'][0]['icon'],
-            'wind_speed': entry['wind']['speed'],
-            'wind_deg': entry['wind']['deg'],
-            'visibility': entry['visibility'],
-            'pop': entry['pop'],
-            'rain': entry['rain']['3h'] if 'rain' in entry else 0,
-            'clouds': entry['clouds']['all']
-        }
+        if date != str(current_date):
+            structured_data[date][time] = {
+                'temperature': entry['main']['temp'],
+                'feels_like': entry['main']['feels_like'],
+                'temp_min': entry['main']['temp_min'],
+                'temp_max': entry['main']['temp_max'],
+                'pressure': entry['main']['pressure'],
+                'humidity': entry['main']['humidity'],
+                'weather': entry['weather'][0]['description'],
+                'icon': entry['weather'][0]['icon'],
+                'wind_speed': entry['wind']['speed'],
+                'wind_deg': entry['wind']['deg'],
+                'visibility': entry['visibility'],
+                'pop': entry['pop'],
+                'rain': entry['rain']['3h'] if 'rain' in entry else 0,
+                'clouds': entry['clouds']['all']
+            }
     
-    return structured_data
-
-weather_tool = Tool(
-    name="WeatherLookup",
-    func=get_weather_info,
-    description="Useful to get the current weather information and basic forecast for a city."
-)
-
-
-
-len(get_forecast('London')['list'])
-
-
-get_forecast('London')
-
-
-# Load Llama.cpp Model
-llm = LlamaCpp(model_path="../models/Phi-3-mini-4k-instruct-gguf/Phi-3-mini-4k-instruct-q4.gguf",n_ctx=4096)  
-
-# Tools (Include both Weather and Forecast Tools)
-tools = [weather_tool, forecast_tool]
-
-# Initialize Agent
-agent = initialize_agent(tools, llm, agent="zero-shot-react-description", verbose=True) 
-
-
-
-# Example Usage
-print(agent.run("Can you tell me current weather in Kalyani?"))
-
-
-# Example Usage
-print(agent.run("What's the weather like in New York?"))
-
-
-print(agent.run("What's the forecast for the next 2 days in Kalyani?"))
-
-
-print(agent.run("What's the forecast for tomorrow morning in London?"))
-
-
-# agent.run("What's the weather like in Kalyani?")
-
-
-
+    return {str(next_date): structured_data[str(next_date)]}
