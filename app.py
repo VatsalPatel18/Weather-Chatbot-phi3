@@ -1,11 +1,15 @@
 import os
 import gradio as gr
 from langchain.agents import Tool
-from langchain.llms import LlamaCpp
+from langchain_community.llms import LlamaCpp  # Use langchain_community
 from langchain.agents import initialize_agent
-from functions import get_weather_info, get_forecast, restructure_forecast
+from functions2 import get_weather_info, get_forecast, restructure_forecast
 from huggingface_hub import hf_hub_download  
 import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
@@ -13,7 +17,7 @@ llm = LlamaCpp(
         repo_id=os.environ.get("REPO_ID", "PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"),
         filename=os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf"),
     ),
-    n_ctx=4096*5,
+    n_ctx=4096*10,
     n_gpu_layers=-1
 )
 
@@ -78,7 +82,7 @@ with gr.Blocks(css="style.css") as demo:
 
 # Launch the Gradio interface
 def main():
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=True, debug=True)
+    demo.launch(share=True, debug=True)
 
 if __name__ == "__main__":
     main()

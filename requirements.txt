@@ -4,3 +4,4 @@ llama-cpp-python
 langchain
 langchain-community
 huggingface_hub
+python-dotenv
