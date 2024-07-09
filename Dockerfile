@@ -18,7 +18,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY app.py functions2.py style.css ./
+COPY app.py functions.py style.css ./
 
 # Set environment variables
 ENV REPO_ID="PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"

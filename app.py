@@ -3,7 +3,7 @@ import gradio as gr
 from langchain.agents import Tool
 from langchain_community.llms import LlamaCpp  # Use langchain_community
 from langchain.agents import initialize_agent
-from functions2 import get_weather_info, get_forecast, restructure_forecast
+from functions import get_weather_info, get_forecast, restructure_forecast
 from huggingface_hub import hf_hub_download  
 import json
 from dotenv import load_dotenv
