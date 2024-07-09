@@ -52,7 +52,7 @@ def get_forecast(city):
     
     return restructure_forecast(forecast_json)
 
-def restructure_forecast(forecast_json):
+def restructure_forecast2(forecast_json):
     """Restructures the forecast JSON data into a nested dictionary by date and time, including the next three days."""
     current_date = datetime.now().date()
     forecast_dates = [current_date + timedelta(days=i) for i in range(1, 4)]
@@ -82,3 +82,64 @@ def restructure_forecast(forecast_json):
     
     return {str(date): structured_data[str(date)] for date in forecast_dates}
 
+def restructure_forecast(forecast_json):
+    """Restructures the forecast JSON data into a nested dictionary by date and specific times."""
+    current_date = datetime.now().date()
+    forecast_dates = [current_date + timedelta(days=i) for i in range(1, 3)]
+    important_hours = ['09:00:00', '12:00:00', '15:00:00', '18:00:00', '21:00:00']
+
+    structured_data = defaultdict(dict)
+    
+    for entry in forecast_json['list']:
+        date, time = entry['dt_txt'].split()
+        date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+        if date_obj in forecast_dates and time in important_hours:
+            structured_data[date][time] = {
+                'temperature': entry['main']['temp'],
+                'feels_like': entry['main']['feels_like'],
+                'temp_min': entry['main']['temp_min'],
+                'temp_max': entry['main']['temp_max'],
+                'pressure': entry['main']['pressure'],
+                'humidity': entry['main']['humidity'],
+                'weather': entry['weather'][0]['description'],
+                'icon': entry['weather'][0]['icon'],
+                'wind_speed': entry['wind']['speed'],
+                'wind_deg': entry['wind']['deg'],
+                'visibility': entry['visibility'],
+                'pop': entry['pop'],
+                'rain': entry['rain']['3h'] if 'rain' in entry else 0,
+                'clouds': entry['clouds']['all']
+            }
+
+    return {str(date): structured_data[str(date)] for date in forecast_dates}
+
+
+def restructure_forecast3(forecast_json):
+    """Restructures the forecast JSON data into a nested dictionary by date and time, including the next three days."""
+    current_date = datetime.now().date()
+    forecast_dates = [current_date + timedelta(days=i) for i in range(1, 4)]
+
+    structured_data = defaultdict(dict)
+    
+    for entry in forecast_json['list']:
+        date, time = entry['dt_txt'].split()
+        date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+        if date_obj in forecast_dates:
+            structured_data[date][time] = {
+                'temperature': entry['main']['temp'],
+                'feels_like': entry['main']['feels_like'],
+                'temp_min': entry['main']['temp_min'],
+                'temp_max': entry['main']['temp_max'],
+                'pressure': entry['main']['pressure'],
+                'humidity': entry['main']['humidity'],
+                'weather': entry['weather'][0]['description'],
+                'icon': entry['weather'][0]['icon'],
+                'wind_speed': entry['wind']['speed'],
+                'wind_deg': entry['wind']['deg'],
+                'visibility': entry['visibility'],
+                'pop': entry['pop'],
+                'rain': entry['rain']['3h'] if 'rain' in entry else 0,
+                'clouds': entry['clouds']['all']
+            }
+    
+    return {str(date): structured_data[str(date)] for date in forecast_dates}

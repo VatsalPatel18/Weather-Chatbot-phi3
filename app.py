@@ -17,7 +17,7 @@ llm = LlamaCpp(
         repo_id=os.environ.get("REPO_ID", "PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"),
         filename=os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf"),
     ),
-    n_ctx=4096*10,
+    n_ctx=4096*15,
     n_gpu_layers=-1
 )
 
