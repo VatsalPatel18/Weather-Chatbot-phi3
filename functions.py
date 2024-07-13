@@ -2,8 +2,22 @@ import requests
 from collections import defaultdict
 from datetime import datetime, timedelta
 import json
+import threading
+import time
+import os
+import signal
 
 api_key = "c6dfc4d92a8f972d237ef696ec87b37a"
+
+def shutdown():
+    # Wait a bit before shutdown to allow the response to be returned
+    def stop():
+        time.sleep(1)
+        os.kill(os.getpid(), signal.SIGTERM)  # Send SIGTERM to the current process to stop Gradio
+        os._exit(0)
+    threading.Thread(target=stop).start()
+    return "Shutting down and closing the Gradio window..."
+
 
 def get_weather_info(city):
     """Fetches current weather information for a city using OpenWeatherMap API."""
