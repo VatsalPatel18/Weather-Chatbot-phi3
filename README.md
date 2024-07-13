@@ -17,13 +17,18 @@ You can install the package using pip:
 ```bash
 pip install weather-chatbot-phi3
 ```
-## Useage 
+
+## Use in terminal
 
 ```bash
-from weather_chatbot import WeatherChatbot
+weather-chatbot-phi3
 
-chatbot = WeatherChatbot()
-response = chatbot.get_weather("New York")
+## Use in notebook
+
+```bash
+from weather_chatbot import app
+
+app.main()
 print(response)
 ```
 
