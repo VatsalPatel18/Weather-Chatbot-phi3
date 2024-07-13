@@ -3,7 +3,7 @@ import gradio as gr
 from langchain.agents import Tool
 from langchain_community.llms import LlamaCpp
 from langchain.agents import initialize_agent
-from functions import get_weather_info, get_forecast, restructure_forecast
+from functions import get_weather_info, get_forecast, restructure_forecast, shutdown
 from dotenv import load_dotenv
 from download_model import download_model
 
@@ -69,6 +69,8 @@ with gr.Blocks(css="style.css") as demo:
             state = gr.State([])
             btn = gr.Button("Submit")
             btn.click(respond, [message, state], [response, state])
+            shutdown_btn = gr.Button("Shutdown")
+            shutdown_btn.click(shutdown, [], response)
     
     gr.Examples(
         examples=[
