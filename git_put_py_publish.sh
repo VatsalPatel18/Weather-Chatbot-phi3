@@ -4,10 +4,10 @@
 ssh -T git@github.com
 
 # Add changes to Git
-git add .
+git add -A
 
 # Commit changes
-git commit -m "Refactor model download logic and update app.py"
+git commit -m "Revised code"
 
 # Push changes to GitHub
 git push origin master
