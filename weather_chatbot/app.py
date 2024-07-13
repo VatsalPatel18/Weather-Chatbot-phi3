@@ -71,7 +71,7 @@ with gr.Blocks(css="style.css") as demo:
             btn.click(respond, [message, state], [response, state])
             shutdown_btn = gr.Button("Shutdown")
             shutdown_btn.click(shutdown, [], response)
-
+    
     gr.Examples(
         examples=[
             ["What's the weather in New York?"],
@@ -80,8 +80,6 @@ with gr.Blocks(css="style.css") as demo:
         ],
         inputs=message
     )
-
-    gr.Row().append(shutdown_btn)
 
 # Launch the Gradio interface
 def main():
