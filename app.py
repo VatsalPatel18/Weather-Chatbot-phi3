@@ -1,23 +1,22 @@
 import os
 import gradio as gr
 from langchain.agents import Tool
-from langchain_community.llms import LlamaCpp  # Use langchain_community
+from langchain_community.llms import LlamaCpp
 from langchain.agents import initialize_agent
 from functions import get_weather_info, get_forecast, restructure_forecast
-from huggingface_hub import hf_hub_download  
-import json
 from dotenv import load_dotenv
+from download_model import download_model
 
 # Load environment variables from .env file
 load_dotenv()
 
+# Ensure the model is downloaded
+download_model()
+
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
-    model_path=hf_hub_download(
-        repo_id=os.environ.get("REPO_ID", "PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"),
-        filename=os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf"),
-    ),
-    n_ctx=4096*15,
+    model_path=os.path.join("model", "phi-3-gguf", os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf")),
+    n_ctx=4096*8,
     n_gpu_layers=-1
 )
 
@@ -31,7 +30,7 @@ weather_tool = Tool(
 forecast_tool = Tool(
     name="ForecastLookup",
     func=lambda city: get_forecast(city),
-    description="Useful to get the weather forecast for the next three days for a city. It includes information on temperature, pressure, humidity, wind, clouds, and rain."
+    description="Useful to get the weather forecast for the next two days for a city. It includes information on temperature, pressure, humidity, wind, clouds, and rain."
 )
 
 # Tools (Include both Weather and Forecast Tools)

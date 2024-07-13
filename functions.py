@@ -55,7 +55,7 @@ def get_forecast(city):
 def restructure_forecast2(forecast_json):
     """Restructures the forecast JSON data into a nested dictionary by date and time, including the next three days."""
     current_date = datetime.now().date()
-    forecast_dates = [current_date + timedelta(days=i) for i in range(1, 4)]
+    forecast_dates = [current_date + timedelta(days=i) for i in range(1, 3)]
 
     structured_data = defaultdict(dict)
     
