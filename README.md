@@ -22,6 +22,7 @@ pip install weather-chatbot-phi3
 
 ```bash
 weather-chatbot-phi3
+```
 
 ## Use in notebook
 
