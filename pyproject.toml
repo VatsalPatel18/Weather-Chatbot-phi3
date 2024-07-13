@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "weather-chatbot-phi3"
-version = "0.1.7"
+version = "0.1.8"
 description = "An LLM Chatbot integrated with Open Weather API for Real-Time Weather Information."
 authors = ["Vatsal Patel <vatsal1804@gmail.com>"]
 license = "CC-BY-NC-SA-4.0"
@@ -27,6 +27,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
+setup-weather-chatbot = "setup:main"
 weather-chatbot-phi3 = "weather_chatbot.app:main"
 
 [tool.poetry.dev-dependencies]
