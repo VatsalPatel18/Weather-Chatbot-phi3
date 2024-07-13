@@ -2,8 +2,19 @@ import requests
 from collections import defaultdict
 from datetime import datetime, timedelta
 import json
+import threading
+import time
+import os
 
 api_key = "c6dfc4d92a8f972d237ef696ec87b37a"
+
+def shutdown():
+    # Wait a bit before shutdown to allow the response to be returned
+    def stop():
+        time.sleep(1)
+        os._exit(0)
+    threading.Thread(target=stop).start()
+    return "Shutting down..."
 
 def get_weather_info(city):
     """Fetches current weather information for a city using OpenWeatherMap API."""
