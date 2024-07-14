@@ -3,20 +3,24 @@ import gradio as gr
 from langchain.agents import Tool
 from langchain_community.llms import LlamaCpp
 from langchain.agents import initialize_agent
-from functions import get_weather_info, get_forecast, restructure_forecast, shutdown
-from dotenv import load_dotenv
-from download_model import download_model
+from functions import get_weather_info, get_forecast, shutdown
+from huggingface_hub import hf_hub_download
 
-# Load environment variables from .env file
-load_dotenv()
+# Set custom cache directory
+cache_dir = "/app/hf_cache"
+os.makedirs(cache_dir, exist_ok=True)
 
-# Ensure the model is downloaded
-download_model()
+# Download the model directly in the app
+model_path = hf_hub_download(
+    repo_id=os.environ.get("REPO_ID", "PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"),
+    filename=os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf"),
+    cache_dir=cache_dir
+)
 
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
-    model_path=os.path.join("model", "phi-3-gguf", os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf")),
-    n_ctx=4096*8,
+    model_path=model_path,
+    n_ctx=4096*7,
     n_gpu_layers=-1
 )
 
@@ -83,7 +87,14 @@ with gr.Blocks(css="style.css") as demo:
 
 # Launch the Gradio interface
 def main():
-    demo.launch(share=True, debug=True)
+    demo.launch(
+        server_name="0.0.0.0", 
+        server_port=7860,
+        ssl_keyfile="/app/certificates/selfsigned.key",
+        ssl_certfile="/app/certificates/selfsigned.crt",
+        ssl_verify=False  # Disable SSL verification for development
+        share=True,
+    )
 
 if __name__ == "__main__":
     main()
