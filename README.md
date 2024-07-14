@@ -18,13 +18,13 @@ You can install the package using pip:
 pip install weather-chatbot-phi3
 ```
 
-## Use in UNIX terminal
+## Run in UNIX terminal
 
 ```bash
 weather-chatbot-phi3
 ```
 
-## Use in python notebook
+## Run in python notebook
 
 ```bash
 from weather_chatbot import app
