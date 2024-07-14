@@ -92,7 +92,7 @@ def main():
         server_port=7860,
         ssl_keyfile="/app/certificates/selfsigned.key",
         ssl_certfile="/app/certificates/selfsigned.crt",
-        ssl_verify=False  # Disable SSL verification for development
+        ssl_verify=False,  # Disable SSL verification for development
         share=True,
     )
 
