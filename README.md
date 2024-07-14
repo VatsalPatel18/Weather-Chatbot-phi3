@@ -32,6 +32,10 @@ from weather_chatbot import app
 app.main()
 ```
 
+##Try it out on Google Colab
+
+You can try out the Weather Chatbot on Google Colab by clicking [here](https://colab.research.google.com/drive/1avedy7bhEmuniXi6tBkfPmqJYsZBt9Lc?usp=sharing).
+
 ## Under the Hood
 
 This project leverages the power of `LangChain` for orchestrating the LLM interactions. Here's a breakdown of the key components:

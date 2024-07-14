@@ -3,7 +3,7 @@ import gradio as gr
 from langchain.agents import Tool
 from langchain_community.llms import LlamaCpp
 from langchain.agents import initialize_agent
-from weather_chatbot.functions import get_weather_info, get_forecast, restructure_forecast, shutdown
+from weather_chatbot.functions import get_weather_info, get_forecast, shutdown
 from dotenv import load_dotenv
 from weather_chatbot.download_model import download_model
 
