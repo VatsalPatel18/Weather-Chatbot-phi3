@@ -2,11 +2,11 @@ import os
 from huggingface_hub import hf_hub_download
 
 def download_model():
-    model_path = "./model/phi-3-gguf/Phi-3-mini-128k-instruct.Q4_K_S.gguf"
+    model_path = "./model/phi-3-gguf/Phi-3-mini-4k-instruct-q4.gguf"
     if not os.path.exists(model_path):
         hf_hub_download(
-            repo_id="PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed",
-            filename="Phi-3-mini-128k-instruct.Q4_K_S.gguf",
+            repo_id="microsoft/Phi-3-mini-4k-instruct-gguf",
+            filename="Phi-3-mini-4k-instruct-q4.gguf",
             local_dir="model/phi-3-gguf"
         )
 

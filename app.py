@@ -12,15 +12,15 @@ os.makedirs(cache_dir, exist_ok=True)
 
 # Download the model directly in the app
 model_path = hf_hub_download(
-    repo_id=os.environ.get("REPO_ID", "PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed"),
-    filename=os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf"),
+    repo_id=os.environ.get("REPO_ID", "microsoft/Phi-3-mini-4k-instruct-gguf"),
+    filename=os.environ.get("MODEL_FILE", "Phi-3-mini-4k-instruct-q4.gguf"),
     cache_dir=cache_dir
 )
 
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
     model_path=model_path,
-    n_ctx=4096*8,
+    n_ctx=4096,
     n_gpu_layers=-1
 )
 

@@ -5,8 +5,8 @@ FROM python:3.11-slim
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     GRADIO_SERVER_NAME="0.0.0.0" \
-    REPO_ID="PrunaAI/Phi-3-mini-128k-instruct-GGUF-Imatrix-smashed" \
-    MODEL_FILE="Phi-3-mini-128k-instruct.Q4_K_S.gguf"
+    REPO_ID="microsoft/Phi-3-mini-4k-instruct-gguf" \
+    MODEL_FILE="Phi-3-mini-4k-instruct-q4.gguf"
 
 # Create a working directory
 WORKDIR /app
