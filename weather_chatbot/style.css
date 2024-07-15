@@ -9,3 +9,7 @@ body {
     background-color: #d0d7dc;
     color: #000000;
 }
+.gr-container {
+    max-width: 600px;
+    margin: auto;
+}
