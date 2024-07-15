@@ -20,7 +20,7 @@ model_path = hf_hub_download(
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
     model_path=model_path,
-    n_ctx=4096*7,
+    n_ctx=4096*8,
     n_gpu_layers=-1
 )
 

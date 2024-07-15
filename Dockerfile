@@ -17,6 +17,7 @@ RUN apt-get update && \
     build-essential \
     cmake \
     openssl \
+    wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -32,11 +33,17 @@ COPY certificates /app/certificates
 # Copy the rest of the application code
 COPY . /app/
 
+# Create the cache directory with appropriate permissions
+RUN mkdir -p /app/hf_cache && chmod -R 777 /app/hf_cache
+
 # Ensure the model is downloaded
 RUN python download_model.py
 
 # Expose the port that Gradio will run on
 EXPOSE 7860
+
+# Set the user to root
+USER root
 
 # Run the application
 CMD ["python", "app.py"]
