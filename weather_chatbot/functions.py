@@ -28,7 +28,6 @@ def get_weather_info(city):
         return "Error: Could not fetch weather data."
     data_current = response_current.json()
 
-    coordinates = data_current['coord']
     weather_description = data_current['weather'][0]['description']
     temperature_current = data_current['main']['temp']
     temperature_feels_like = data_current['main']['feels_like']
@@ -44,12 +43,10 @@ def get_weather_info(city):
     rain = data_current.get('rain', {}).get('1h', 0)
     dt = datetime.utcfromtimestamp(data_current['dt']).strftime('%Y-%m-%d %H:%M:%S')
     timezone = data_current['timezone']
-    city_id = data_current['id']
     city_name = data_current['name']
     response_code = data_current['cod']
 
     formatted_info = (
-        f"Coordinates: {coordinates}, "
         f"Weather: {weather_description}, "
         f"Temperature: current {temperature_current}°C, feels like {temperature_feels_like}°C, min {temperature_min}°C, max {temperature_max}°C, "
         f"Pressure: sea level {pressure_sea_level} hPa, ground level {pressure_ground_level} hPa, "
@@ -60,7 +57,6 @@ def get_weather_info(city):
         f"Rain: {rain} mm, "
         f"Date/Time: {dt}, "
         f"Timezone: {timezone} seconds, "
-        f"City ID: {city_id}, "
         f"City Name: {city_name}, "
         f"Response Code: {response_code}"
     )
@@ -77,7 +73,7 @@ def get_forecast(city):
 
     current_date = datetime.now().date()
     forecast_dates = [current_date + timedelta(days=i) for i in range(1, 3)]
-    important_hours = ['09:00:00', '12:00:00', '15:00:00', '18:00:00', '21:00:00']
+    important_hours = ['09:00:00', '15:00:00', '21:00:00']
 
     data = []
 

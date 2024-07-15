@@ -3,6 +3,12 @@
 # SSH to GitHub
 ssh -T git@github.com
 
+# Update version using Poetry
+poetry version patch
+
+# Publish to PyPI using Poetry
+poetry publish --build
+
 # Add changes to Git
 git add -A
 
@@ -12,8 +18,4 @@ git commit -m "Revised code"
 # Push changes to GitHub
 git push origin master
 
-# Update version using Poetry
-poetry version patch
 
-# Publish to PyPI using Poetry
-poetry publish --build

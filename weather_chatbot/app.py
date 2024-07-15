@@ -15,7 +15,7 @@ download_model()
 
 # Initialize the LlamaCpp model
 llm = LlamaCpp(
-    model_path=os.path.join("model", "phi-3-gguf", os.environ.get("MODEL_FILE", "Phi-3-mini-128k-instruct.Q4_K_S.gguf")),
+    model_path=os.path.join("model", "phi-3-gguf", os.environ.get("MODEL_FILE", "Phi-3-mini-4k-instruct-q4.gguf")),
     n_ctx=4096*8,
     n_gpu_layers=-1
 )
