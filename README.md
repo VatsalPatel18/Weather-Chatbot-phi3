@@ -8,7 +8,7 @@ An LLM Chatbot integrated with Open Weather API for Real-Time Weather Informatio
 - Get a 2-day weather forecast for any city.
 - Utilizes `LangChain` for agent-based interactions.
 - Runs on CPU using `llama-cpp-python`.
-- Supports a context length of 128k tokens with the `phi-3-mini-128k-instruct-gguf` model.
+- Supports a context length of 4k tokens with the `phi-3-mini-4k-instruct-gguf` model.
 
 ## Installation
 
@@ -49,7 +49,7 @@ This project leverages the power of `LangChain` for orchestrating the LLM intera
 
 ### LLM with `llama-cpp-python`
 
-The language model used is the `phi-3-mini-128k-instruct-gguf`, which supports a context length of 128k tokens. This model is run on the CPU using `llama-cpp-python`, ensuring that it can operate efficiently without the need for GPU resources.
+The language model used is the `phi-3-mini-4k-instruct-gguf`, which supports a context length of 128k tokens. This model is run on the CPU using `llama-cpp-python`, ensuring that it can operate efficiently without the need for GPU resources.
 
 ## License
 
