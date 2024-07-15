@@ -62,7 +62,7 @@ with gr.Blocks(css="style.css") as demo:
         Get real-time weather forecasts or chat with our assistant. Type your queries in natural language.
         """
     )
-    with gr.Row():
+    with gr.Row(elem_classes="gr-container"):
         with gr.Column():
             message = gr.Textbox(label="Ask a weather question or chat with the assistant", lines=2, placeholder="Type your question here...")
             response = gr.Textbox(label="Response", lines=2)
