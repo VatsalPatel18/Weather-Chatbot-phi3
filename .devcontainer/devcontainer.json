@@ -2,6 +2,6 @@
   "name": "My Powerful Codespace",
   "hostRequirements": {
     "cpus": 8, // Specify the number of CPUs
-    "memory": "16gb" // Specify the amount of RAM
+    "memory": "32gb" // Specify the amount of RAM
   }
 }
