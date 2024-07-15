@@ -1,18 +1,1 @@
-{
-  "name": "Weather Chatbot",
-  "dockerFile": "Dockerfile",
-  "appPort": [
-    "7860:7860"
-  ],
-  "runArgs": [
-    "--env-file",
-    ".env"
-  ],
-  "settings": {
-    "terminal.integrated.defaultProfile.linux": "bash"
-  },
-  "extensions": [
-    "ms-python.python"
-  ],
-  "postCreateCommand": "pip install -r requirements.txt && python download_model.py"
-}
+
