@@ -1,7 +1,13 @@
 {
-  "name": "My Powerful Codespace",
-  "hostRequirements": {
-    "cpus": 4, 
-    "memory": "16gb" 
-  }
+    "name": "My Powerful Codespace - Weather Chatbot",
+    "hostRequirements": {
+        "cpus": 8,
+        "memory": "32gb"
+    },
+    "image": "ghcr.io/vatsalpatel18/weather-chatbot-phi3:latest",
+    "features": {},
+    "customizations": {},
+    // Remove this line or specify the correct port if you want to automatically forward it
+    "forwardPorts": [7860],  
+    "postCreateCommand": "python app.py"
 }
