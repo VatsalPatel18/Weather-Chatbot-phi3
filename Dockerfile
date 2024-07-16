@@ -36,6 +36,10 @@ COPY . /app/
 # Create the cache directory with appropriate permissions
 RUN mkdir -p /app/hf_cache && chmod -R 777 /app/hf_cache
 
+# Manually download the required frpc file for Gradio share link
+RUN wget -O /usr/local/lib/python3.11/site-packages/gradio/frpc_linux_amd64_v0.2 https://cdn-media.huggingface.co/frpc-gradio-0.2/frpc_linux_amd64
+RUN chmod +x /usr/local/lib/python3.11/site-packages/gradio/frpc_linux_amd64_v0.2
+
 # Ensure the model is downloaded
 RUN python download_model.py
 
