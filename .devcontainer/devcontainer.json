@@ -1,8 +1,8 @@
 {
     "name": "My Powerful Codespace - Weather Chatbot",
     "hostRequirements": {
-        "cpus": 8,
-        "memory": "32gb"
+        "cpus": 4,
+        "memory": "16gb"
     },
     "image": "ghcr.io/vatsalpatel18/weather-chatbot-phi3:latest",
     "features": {},
